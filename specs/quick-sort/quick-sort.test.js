@@ -30,9 +30,10 @@ function quickSort(A) {
       }
     }
     // conquer L and R recursively
-    const sortedL = quickSort(L);
-    const sortedR = quickSort(R);
-    return sortedL.concat(pivot, sortedR);
+    return [...quickSort(L), pivot, ...quickSort(R)];
+    // const sortedL = quickSort(L);
+    // const sortedR = quickSort(R);
+    // return sortedL.concat(pivot, sortedR);
   }
 }
 
