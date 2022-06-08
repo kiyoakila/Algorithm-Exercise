@@ -17,15 +17,17 @@ const mergeSort = (A) => {
     const R = mergeSort(A.slice(m));
     return merge(L, R);
   }
-  function merge(A, B) {
-    const C = [];
-    while (A.length > 0 && B.length > 0) {
-      // shift the smaller number to C
-      C.push(A[0] < B[0] ? A.shift() : B.shift());
-    }
-    return C.concat(0 == A.length ? B : A);
-  }
 };
+
+function merge(A, B) {
+  const C = [];
+  while (A.length > 0 && B.length > 0) {
+    // shift the smaller number to C
+    C.push(A[0] < B[0] ? A.shift() : B.shift());
+  }
+  // better way: return C.concat(A,B)
+  return C.concat(0 == A.length ? B : A);
+}
 
 // unit tests
 // do not modify the below code

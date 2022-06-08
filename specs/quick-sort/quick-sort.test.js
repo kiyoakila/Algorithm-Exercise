@@ -12,13 +12,33 @@
 
 */
 
-function quickSort(nums) {
-  // code goes here
+function quickSort(A) {
+  // base case
+  if (A.length < 2) {
+    return A;
+  } else {
+    const pivot = A.pop();
+    // L is the container for all the elements smaller than pivot
+    const L = [];
+    // for larger elements
+    const R = [];
+    for (let i = 0; i < A.length; i++) {
+      if (A[i] < pivot) {
+        L.push(A[i]);
+      } else {
+        R.push(A[i]);
+      }
+    }
+    // conquer L and R recursively
+    const sortedL = quickSort(L);
+    const sortedR = quickSort(R);
+    return sortedL.concat(pivot, sortedR);
+  }
 }
 
 // unit tests
 // do not modify the below code
-test.skip("quickSort", function () {
+test.skip('quickSort', function () {
   const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
   const answer = quickSort(input);
 
