@@ -49,14 +49,15 @@ class LinkedList:
             self.head = newNode
 
     # deletion
+    # But you cant delete the first element...
     # Treating the dummy head with the invariant that it is always pointing to the current correct answer 
     #  the dummy head, that will point to your final answer or list that you will return.
     def delete(self, data):
         dummy = Node("dummy")
         # initialize to point to the head
-        dummy.next = self 
+        dummy.next = self.head 
         p = dummy
-        current = self
+        current = self.head
         # Because we created the dummy head we don't have to treat deleting the head of the original list any different from other elements in the list.
         while(current):
             if current.data == data:
@@ -78,6 +79,11 @@ LL = LinkedList()
 LL.insert(3)
 LL.insert(4)
 LL.insert(5)
+# LL.printLL()
+
+LL.delete(4)
+# print(val.data)
+# LL.printLL()
+LL.delete(3)
+# print(val.data)
 LL.printLL()
-print(LL.hasCycle())
-        
