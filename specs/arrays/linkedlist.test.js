@@ -42,16 +42,39 @@ class LinkedList {
     const popItem = this.tail.val;
     return popItem;
   }
-  delete(val) {
-    const dummy = new Node('dummy');
-    dummy.next = this;
-    const p = dummy;
-    const current = this.head;
-    while (current) {
-      if (current.val === val) {
-        p.next = current.next;
-      }
+  get(index) {
+    const node = this._find(index);
+    return node.val;
+  }
+  _find(index) {
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      current = current.next;
     }
+  }
+  delete(index) {
+    if (index >= this.length) return null;
+    if (index === 0) {
+      const head = this.head;
+      // if the list is not empty
+      if (head) {
+        head = head.next;
+      } else {
+        return undefined;
+      }
+      this.length--;
+      return head.val;
+    }
+    // find the prev node of node to be deleted
+    const node = this._find(index - 1);
+    deleteItem = node.next;
+    node.next = deleteItem.next;
+    // if we are deleting the last item, reset the tail.
+    if (index === this.length - 1) {
+      this.tail = node;
+    }
+    this.length--;
+    return deleteItem.val;
   }
 }
 
