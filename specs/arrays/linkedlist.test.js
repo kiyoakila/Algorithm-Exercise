@@ -30,19 +30,32 @@ class LinkedList {
     this.tail = null;
   }
   push(value) {
-    this.tail.next = new Node(value);
-    this.tail = this.tail.next;
-    this.length++;
-    // const current = this.head
-    // while(current){
-
-    // }
+    if (this.head) {
+      const node = new Node(value);
+      this.tail.next = node;
+      this.tail = node;
+      this.length++;
+    } else {
+      this.head = new Node(value);
+      this.tail = this.head;
+      this.length++;
+    }
+  }
+  printLL() {
+    let current = this.head;
+    const list = [];
+    while (current) {
+      list.push(current.val);
+      current = current.next;
+    }
+    console.log(list.join(' -> '));
   }
   pop() {
-    const popItem = this.tail.val;
-    return popItem;
+    return this.delete(this.length - 1);
   }
+
   get(index) {
+    if (index >= this.length) return null;
     const node = this._find(index);
     return node.val;
   }
@@ -51,23 +64,24 @@ class LinkedList {
     for (let i = 0; i < index; i++) {
       current = current.next;
     }
+    return current;
   }
   delete(index) {
     if (index >= this.length) return null;
     if (index === 0) {
-      const head = this.head;
+      const hd = this.head;
       // if the list is not empty
-      if (head) {
-        head = head.next;
+      if (hd) {
+        this.head = hd.next;
       } else {
         return undefined;
       }
       this.length--;
-      return head.val;
+      return hd.val;
     }
     // find the prev node of node to be deleted
     const node = this._find(index - 1);
-    deleteItem = node.next;
+    const deleteItem = node.next;
     node.next = deleteItem.next;
     // if we are deleting the last item, reset the tail.
     if (index === this.length - 1) {
